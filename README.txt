@@ -17,7 +17,7 @@ in format
 }
 - to edit endpont by id:
 PUT json
-http://localhost:8080/api/v1/endpoints/{1}
+http://localhost:8080/api/v1/endpoints/{id}
 
 - to delete endpoint by id:
 http://localhost:8080/api/v1/endpoints/{id}
