@@ -11,7 +11,7 @@ http://localhost:8080/api/v1/endpoints/
 in format
 {
     "name": "UrlName",
-    "url": "www.imdb.com",
+    "url": "https://www.imdb.com/",
     "monitoredIntervalInSeconds":30,
     "userId":1
 }
