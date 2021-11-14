@@ -1,4 +1,4 @@
-This program allows to:
+This app allows to:
 - create, edit, delete, list URLs
 - monitor urls on background with given intervals in seconds
 - list last 10 monitored results for each particular URL
