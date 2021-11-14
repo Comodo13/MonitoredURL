@@ -6,7 +6,7 @@ This app allows to:
 There are already 2 users in DB(id:1,2)
 Endpoints to use it:
 - to create endpoint:
-POST json here
+POST JSON here
 http://localhost:8080/api/v1/endpoints/
 in format
 {
@@ -16,7 +16,7 @@ in format
     "userId":1
 }
 - to edit endpont by id:
-PUT json
+PUT JSON
 http://localhost:8080/api/v1/endpoints/{id}
 
 - to delete endpoint by id:
