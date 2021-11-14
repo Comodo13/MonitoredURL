@@ -22,13 +22,13 @@ http://localhost:8080/api/v1/endpoints/{id}
 - to delete endpoint by id:
 http://localhost:8080/api/v1/endpoints/{id}
 
-- to get list with last 10 results of particular endpoint by id:
+- to get list with last 10 results of particular endpoint by EndpointId:
 GET
-http://localhost:8080/api/v1/results/{id}
+http://localhost:8080/api/v1/results/{EndpointId}
 
-- to get endpoints of particular user by id:
+- to get endpoints of particular user by UserId:
 GET
-http://localhost:8080/api/v1/endpoints/{id}
+http://localhost:8080/api/v1/endpoints/{UserId}
 
 
 
