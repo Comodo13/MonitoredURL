@@ -15,9 +15,9 @@ in format
     "monitoredIntervalInSeconds":30,
     "userId":1
 }
-- to edit endpont:
+- to edit endpont by id:
 PUT json
-http://localhost:8080/api/v1/endpoints/
+http://localhost:8080/api/v1/endpoints/{1}
 
 - to delete endpoint by id:
 http://localhost:8080/api/v1/endpoints/{id}
