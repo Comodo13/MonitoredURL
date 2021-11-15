@@ -1,5 +1,6 @@
 package dmitri.korunovacni.Applifting.service;
 
+import dmitri.korunovacni.Applifting.exception.UserNotFoundException;
 import dmitri.korunovacni.Applifting.model.MonitoredEndpoint;
 import dmitri.korunovacni.Applifting.model.User;
 import dmitri.korunovacni.Applifting.model.dto.EndpointRequest;
@@ -7,7 +8,9 @@ import dmitri.korunovacni.Applifting.repo.EndpointRepository;
 import dmitri.korunovacni.Applifting.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ServerErrorException;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,38 +29,28 @@ public class EndpointServiceImpl implements EndpointService {
         this.monitoredResultService = monitoredResultService;
     }
 
-
-
     //create endpoint and start scheduling on background
     @Override
     public MonitoredEndpoint createEndpoint(EndpointRequest request) {
         MonitoredEndpoint endpoint = new MonitoredEndpoint();
-
+        User user;
 
         if (request.getMonitoredIntervalInSeconds()==0) {
-            endpoint.setMonitoredIntervalInSeconds(Long.valueOf(120)); //120s - default interval
+            endpoint.setMonitoredIntervalInSeconds(120L); //120s - default interval
         }
         else {
             endpoint.setMonitoredIntervalInSeconds((long) request.getMonitoredIntervalInSeconds());
         }
-//        if (request.getUserId()==null) {
-//            throw new UserNotFoundException("Enter userId");
-//        }
 
-//        if (userRepository.getById(Long.valueOf(request.getUserId())) == null) {
-//            throw new UserNotFoundException("User with ID: " + request.getUserId() + "not found.");
-//        }
-        User user = new User();
         try {
-         user = userRepository.getById(request.getUserId());
+            user = userRepository.getById(request.getUserId());
         }
-        catch(Exception ex){
+        catch (EntityNotFoundException ex) {
             System.err.println("Enter userId");
+            throw new UserNotFoundException("User with ID:" + request.getUserId() + "was not found");
+        } catch (Exception ex) {
+            throw new ServerErrorException("Server Error", ex);
         }
-//        if(userRepository.findById(request.getUserId()).get()==null) {
-//            throw new UserNotFoundException("Enter userId");
-//        }
-//        else {
             endpoint.setName(request.getName());
             endpoint.setUrl(request.getUrl());
             endpoint.setUser(user);
@@ -68,7 +61,6 @@ public class EndpointServiceImpl implements EndpointService {
             monitoredResultService.startScheduleChecking(endpoint);
 
             return endpoint;
-
     }
 
     @Override
@@ -94,10 +86,10 @@ public class EndpointServiceImpl implements EndpointService {
             editing.setName(request.getName());
         }
         if (request.getMonitoredIntervalInSeconds()==0) {
-            editing.setMonitoredIntervalInSeconds(Long.valueOf(120));
+            editing.setMonitoredIntervalInSeconds(120L);
         }
         else if (request.getMonitoredIntervalInSeconds()>0) {
-            editing.setMonitoredIntervalInSeconds(Long.valueOf(request.getMonitoredIntervalInSeconds()));
+            editing.setMonitoredIntervalInSeconds((long) request.getMonitoredIntervalInSeconds());
         }
             endpointRepository.save(editing);
             return editing;

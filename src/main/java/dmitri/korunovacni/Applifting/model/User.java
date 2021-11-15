@@ -25,7 +25,6 @@ public class User {
     @Column(name = "user_token")
     private String token;
     @OneToMany
-            //(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy = "monitor_user")
     @JoinColumn(name = "user_id")
     private List<MonitoredEndpoint> endpoints = new ArrayList<>();
 }

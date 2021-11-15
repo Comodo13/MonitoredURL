@@ -1,6 +1,6 @@
 package dmitri.korunovacni.Applifting.model.dto;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
 public class EndpointRequest {

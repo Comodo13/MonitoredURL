@@ -29,9 +29,8 @@ public class CheckUrlTask extends TimerTask {
         int statusCode = response.getStatusCode().value();
         String payload = response.getBody();
 
-
-        resultService.createResult(payload,statusCode,endpoint);
-
-
+        if (payload !=null) {
+        resultService.createResult(payload, statusCode, endpoint);
+        }
     }
 }

@@ -20,8 +20,6 @@ public class MonitoredResult {
     private LocalDateTime dateOfCheck;
     private int statusCode;
     private String returnedPayload;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "endpoint_id")
     @Column(name = "endpoint_id")
     private Long endpointId;
 }

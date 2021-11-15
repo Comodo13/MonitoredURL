@@ -14,6 +14,7 @@ public class EndpointTransformer {
         request.setUserId(endpoint.getUser().getId());
         request.setMonitoredIntervalInSeconds(endpoint.getMonitoredIntervalInSeconds().intValue());
         return request;
+
     }
 
     public static EndpointDto toDto(MonitoredEndpoint endpoint) {

@@ -30,8 +30,6 @@ class EndpointServiceImplTest {
     @Mock
     MonitoredResultService monitoredResultService;
 
-
-
     @Test
     void createEndpoint() {
 
@@ -68,11 +66,6 @@ class EndpointServiceImplTest {
     }
 
     @Test
-    void getById() {
-
-    }
-
-    @Test
     void editEndpoint() {
         EndpointRequest request = new EndpointRequest();
         request.setMonitoredIntervalInSeconds(30);
@@ -95,9 +88,4 @@ class EndpointServiceImplTest {
         Assert.assertEquals(endpointServiceImpl.editEndpoint(request, id).getName(),edited.getName());
     }
 
-
-
-    @Test
-    void getByUserId() {
-    }
 }

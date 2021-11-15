@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Timer;
+import java.util.*;
 
 @Service
 public class MonitoredResultServiceImpl implements MonitoredResultService {
@@ -33,18 +30,20 @@ public class MonitoredResultServiceImpl implements MonitoredResultService {
         timer.schedule(check, 0, endpoint.getMonitoredIntervalInSeconds()*1000);
     }
 
-    @Override
-    public List<MonitoredResult> getLastTenResultsByEndpointId(Long id) {
-        MonitoredEndpoint point = endpointRepository.getById(id);
-           List<MonitoredResult> results = point.getResults();
-           Collections.reverse(results);
-           if (results.size()>=10) {
-               return results.subList(0,10);
-           }
-           else if (results.size()<11) {
-               return  results.subList(0,results.size());
-           }
-           else return new ArrayList<>();
+@Override
+public List<MonitoredResult> getLastTenResultsByEndpointId(Long id) {
+    MonitoredEndpoint point = endpointRepository.getById(id);
+    List<MonitoredResult> results = point.getResults();
+
+    results.sort(Comparator.comparing(MonitoredResult::getDateOfCheck).reversed());
+    if (results.size()>=10) {
+        return results.subList(0,10);
+    }
+    else if (results.size()==0) {
+        return new ArrayList<>();
+    }
+    else
+        return  results.subList(0,results.size());
     }
 
     @Override
