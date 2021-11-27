@@ -18,17 +18,17 @@ in format
 }
 After that timer with given interval will start immediately
 
-- to edit endpont by id:
+- to edit endpont by EndpointId:
 PUT JSON
-http://localhost:8080/api/v1/endpoints/{id}
+http://localhost:8080/api/v1/endpoints/{EndpointId}
 
-- to delete endpoint by id:
+- to delete endpoint by EndpointId:
 DELETE
-http://localhost:8080/api/v1/endpoints/{id}
+http://localhost:8080/api/v1/endpoints/{EndpointId}
 
 - to get list with last 10 results of particular endpoint by EndpointId:
 GET
-http://localhost:8080/api/v1/results/{EndpointId}g
+http://localhost:8080/api/v1/results/{EndpointId}
 
 - to get endpoints of particular user by UserId:
 GET
